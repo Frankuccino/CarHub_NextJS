@@ -22,8 +22,7 @@ const SearchBar = () => {
     const [model, setmodel] = useState('')
     const router = useRouter();
 
-    const handleSearch = (e: React.
-    FormEvent<HTMLFormElement>) => {
+    const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if(manufacturer === '' && model === '') {
@@ -50,9 +49,7 @@ const SearchBar = () => {
 
         const newPathName = `${window.location.pathname}?${searchParams.toString()}`
 
-        router.push(newPathName,  {
-            scroll: false,
-          });
+        router.push(newPathName, {scroll: false});
     }
 
     return (
