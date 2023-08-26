@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { CarCard, CustomFilter, Hero, SearchBar,  } from '@/components'
+import { CarCard, CustomFilter, Hero, SearchBar, ShowMore,  } from '@/components'
 import { fetchCars } from '@/utils';
 import { FilterProps } from '@/types';
 import { fuels, yearsOfProduction } from '@/constants';
@@ -11,7 +11,7 @@ export default async function Home({ searchParams }: {searchParams: FilterProps}
     year: searchParams.year || 2022,
     fuel: searchParams.fuel || '',
     limit: searchParams.limit || 10,
-    model: searchParams.model || 'r8'
+    model: searchParams.model || ''
   });
 
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
@@ -42,6 +42,11 @@ export default async function Home({ searchParams }: {searchParams: FilterProps}
               <CarCard car={car} /> 
               ))}
             </div>
+
+            <ShowMore 
+              pageNumber={(searchParams.limit || 10 ) / 10}
+              isNext={(searchParams.limit || 10) > allCars.length}
+            />
           </section>
         ) : (
           <div className='home__error-container'>
@@ -49,6 +54,8 @@ export default async function Home({ searchParams }: {searchParams: FilterProps}
             <p>{allCars?.message}</p>
           </div>
         )}
+
+
       </div>
     </main>
   )
